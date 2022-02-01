@@ -8,7 +8,7 @@
             <url-pattern>/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <role-name>user</role-name>
+            <role-name>flangeuser</role-name>
         </auth-constraint>
         <user-data-constraint>
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
@@ -21,6 +21,6 @@
     </login-config>
 
     <security-role>
-        <role-name>user</role-name>
+        <role-name>flangeuser</role-name>
     </security-role>
 </web-app>
