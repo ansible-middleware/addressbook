@@ -1,72 +1,103 @@
-<%--
-    JBoss, Home of Professional Open Source
-    Copyright 2015, Red Hat, Inc. and/or its affiliates, and individual
-    contributors by the @authors tag. See the copyright.txt in the
-    distribution for a full listing of individual contributors.
+<%-- JBoss, Home of Professional Open Source Copyright 2015, Red Hat, Inc. and/or its affiliates, and individual
+    contributors by the @authors tag. See the copyright.txt in the distribution for a full listing of individual
+    contributors. Licensed under the Apache License, Version 2.0 (the "License" ); you may not use this file except in
+    compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+    an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+    specific language governing permissions and limitations under the License. --%>
+    <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="ISO-8859-1" %>
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+            <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+            <html>
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-    http://www.apache.org/licenses/LICENSE-2.0
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
---%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>registrationPage.jsp</title>
-</head>
-<body>
-    <h1>Welcome to JBoss!</h1>
+            <head>
+            </head>
 
-    <div>
-        <p>You have successfully deployed a Jakarta EE web
-            application.</p>
-    </div>
+            <body>
+                <h2>Registration</h2>
+                <form class="pf-c-form pf-m-horizontal" action="register.do" method="POST">
+                    <c:choose>
+                        <c:when test="${empty errorMessage}">
+                            <div class="pf-c-form__alert" hidden>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="pf-c-form__alert">
+                        </c:otherwise>
+                    </c:choose>
+                    <div class="pf-c-alert pf-m-danger pf-m-inline" aria-label="Inline danger alert">
+                        <div class="pf-c-alert__icon">
+                            <i class="fas fa-fw fa-exclamation-circle" aria-hidden="true"></i>
+                        </div>
+                        <p class="pf-c-alert__title">
+                            <span class="pf-screen-reader">Error alert:</span>
+                            ${errorMessage}
+                        </p>
+                    </div>
+                    </div>
+                    <c:choose>
+                        <c:when test="${empty infoMessage}">
+                            <div class="pf-c-form__alert" hidden>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="pf-c-form__alert">
+                        </c:otherwise>
+                    </c:choose>
+                    <div class="pf-c-alert pf-m-info pf-m-inline" aria-label="Inline info alert">
+                        <div class="pf-c-alert__icon">
+                            <i class="fas fa-fw fa-info-circle" aria-hidden="true"></i>
+                        </div>
+                        <p class="pf-c-alert__title">
+                            <span class="pf-screen-reader">Info alert:</span>
+                            ${infoMessage}
+                        </p>
+                    </div>
+                    </div>
+                    <div class="pf-c-form__group">
+                        <div class="pf-c-form__group-label">
+                            <label class="pf-c-form__label" for="registration-name">
+                                <span class="pf-c-form__label-text">Name</span>
+                            </label>
+                        </div>
+                        <div class="pf-c-form__group-control">
+                            <input class="pf-c-form-control" id="registration-name" name="name"
+                                value="${newMember.name}" />
+                        </div>
+                    </div>
+                    <div class="pf-c-form__group">
+                        <div class="pf-c-form__group-label">
+                            <label class="pf-c-form__label" for="registration-email">
+                                <span class="pf-c-form__label-text">Email</span>
+                            </label>
+                        </div>
+                        <div class="pf-c-form__group-control">
+                            <input class="pf-c-form-control" id="registration-email" name="email" type="email"
+                                value="${newMember.email}" required />
+                        </div>
+                    </div>
+                    <div class="pf-c-form__group">
+                        <div class="pf-c-form__group-label">
+                            <label class="pf-c-form__label" for="registration-phone">
+                                <span class="pf-c-form__label-text">Phone</span>
+                            </label>
+                        </div>
+                        <div class="pf-c-form__group-control">
+                            <input class="pf-c-form-control" id="registration-phone" name="phoneNumber"
+                                value="${newMember.phoneNumber}" required type="tel" pattern="[0-9]{10,12}"
+                                aria-describedby="registration-phone-helper" />
+                            <p class="pf-c-form__helper-text" id="registration-phone-helper" aria-live="polite">
+                                Digits between 10-12 characters in length</p>
+                        </div>
+                    </div>
+                    <div class="pf-c-form__group pf-m-action">
+                        <div class="pf-c-form__group-control">
+                            <div class="pf-c-form__actions">
+                                <button class="pf-c-button pf-m-primary" type="submit">Submit</button>
+                                <button class="pf-c-button pf-m-link" type="reset">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
 
-    <form id="reg" action="register.do" method="POST">
-        <h2>Member Registration</h2>
-        <table>
-            <tr>
-                <td style="text-align: right;"><label for="name">Name:</label>
-                </td>
-                <td><input type="text" id=name name="name"
-                    value="${newMember.name}" /></td>
-            </tr>
-            <tr>
-                <td style="text-align: right;"><label for="email">Email:</label>
-                </td>
+            </body>
 
-                <td><input type="text" id="email" name="email"
-                    value="${newMember.email}" /> <!-- <h:message  for="email" errorClass="invalid" />-->
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: right;"><label
-                    for="phoneNumber">Phone #:</label></td>
-                <td><input id="phoneNumber" name="phoneNumber"
-                    type="text" value="${newMember.phoneNumber}" /></td>
-            </tr>
-        </table>
-        <p>
-            <input id="register" type="submit" value="Register" /> 
-        </p>
-        <p>
-            <label style="color: green;width: 100%;text-align: left;">${infoMessage}</label> 
-        </p>
-        <p>
-             <label style="color: red; width: 100%;text-align: left;">${errorMessage}</label>
-        </p>
-    </form>
-
-
-
-
-</body>
-</html>
+            </html>
